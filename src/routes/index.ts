@@ -6,7 +6,7 @@ const PATH_ROUTER = __dirname
 const router = Router()
 
 const cleanFileName = (fileName: string) => {
-    const file = fileName.split(' ').shift()
+    const file = fileName.split('.').shift()
     return file
 }
 

@@ -6,7 +6,7 @@ const PATH_ROUTER = __dirname
 const router = Router()
 
 const cleanFileName = (fileName: string) => {
-    const file = path.basename(fileName, '.ts')
+    const file = fileName.split(' ').shift()
     return file
 }
 

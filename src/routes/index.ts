@@ -1,0 +1,23 @@
+import { Router } from 'express';
+import fs from 'node:fs'
+import path from 'node:path'
+
+const PATH_ROUTER = __dirname
+const router = Router()
+
+const cleanFileName = (fileName: string) => {
+    const file = path.basename(fileName, '.ts')
+    return file
+}
+
+fs.readdirSync(PATH_ROUTER).forEach(fileName => {
+    const cleanName = cleanFileName(fileName)
+    if (cleanName != 'index') {
+        import(`./${fileName}`).then(moduleRouter => {
+            router.use(`/${cleanName}`, moduleRouter.router)
+        })
+    }
+})
+
+
+export { router }
